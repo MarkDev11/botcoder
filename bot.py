@@ -22,6 +22,8 @@ import threading
 # Mengambil token secara aman dari Environment Variables
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 OLLAMA_API_KEY = os.environ.get("OLLAMA_API_KEY")
+if not TELEGRAM_TOKEN or not OLLAMA_API_KEY:
+    raise ValueError("🚨 CRITICAL ERROR: TELEGRAM_TOKEN atau OLLAMA_API_KEY belum diisi di menu Environment Variables Render!")
 
 MAX_FILES_PER_PROJECT = 10  # 🛡️ Hard Limit anti RAM jebol / Abuse
 BLUEPRINT_TTL = 3600        # 🗑 Waktu kadaluarsa blueprint (1 Jam)
