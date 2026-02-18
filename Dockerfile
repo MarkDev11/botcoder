@@ -11,5 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy script bot Anda
 COPY arsitek_bot.py .
 
+EXPOSE 7860
+
 # Perintah untuk menjalankan bot secara terus-menerus
-CMD ["python", "arsitek_bot.py"]
+CMD ["python", "bot.py"]

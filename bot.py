@@ -250,7 +250,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 # ==========================================
-# DUMMY WEB SERVER (UNTUK RENDER.COM)
+# DUMMY WEB SERVER (WAJIB UNTUK HUGGING FACE)
 # ==========================================
 from flask import Flask
 import threading
@@ -259,15 +259,13 @@ web_app = Flask(__name__)
 
 @web_app.route('/')
 def home():
-    return "Arsitek Bot is Alive and Running!"
+    return "🤖 Arsitek Bot is Alive on Hugging Face Spaces!"
 
 def run_web():
-    # Ambil port dari environment Render, default 8080
-    port = int(os.environ.get("PORT", 8080))
-    web_app.run(host="0.0.0.0", port=port)
+    # Hugging Face Spaces WAJIB menggunakan port 7860
+    web_app.run(host="0.0.0.0", port=7860)
 
 def keep_alive():
-    # Jalankan web server di thread terpisah agar bot tidak terblokir
     t = threading.Thread(target=run_web)
     t.daemon = True
     t.start()
@@ -276,7 +274,7 @@ def keep_alive():
 # 5. ENTRY POINT
 # ==========================================
 def main():
-    print("🤖 Menyalakan Dummy Web Server untuk Render...")
+    print("🤖 Menyalakan Dummy Web Server di Port 7860...")
     keep_alive() # Panggil fungsi ini!
 
     print("🤖 Bot Arsitek V3 Menyala...")
