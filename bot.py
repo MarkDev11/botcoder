@@ -243,15 +243,41 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 # ==========================================
+# DUMMY WEB SERVER (UNTUK RENDER.COM)
+# ==========================================
+from flask import Flask
+import threading
+
+web_app = Flask(__name__)
+
+@web_app.route('/')
+def home():
+    return "Arsitek Bot is Alive and Running!"
+
+def run_web():
+    # Ambil port dari environment Render, default 8080
+    port = int(os.environ.get("PORT", 8080))
+    web_app.run(host="0.0.0.0", port=port)
+
+def keep_alive():
+    # Jalankan web server di thread terpisah agar bot tidak terblokir
+    t = threading.Thread(target=run_web)
+    t.daemon = True
+    t.start()
+
+# ==========================================
 # 5. ENTRY POINT
 # ==========================================
 def main():
-    print("🤖 Bot Arsitek V3 (Ultimate Production Ready) Menyala...")
+    print("🤖 Menyalakan Dummy Web Server untuk Render...")
+    keep_alive() # Panggil fungsi ini!
+
+    print("🤖 Bot Arsitek V3 Menyala...")
     app = Application.builder().token(TELEGRAM_TOKEN).build()
-    
+
     app.add_handler(CommandHandler("create", cmd_create))
     app.add_handler(CallbackQueryHandler(handle_callback))
-    
+
     app.run_polling()
 
 if __name__ == '__main__':
