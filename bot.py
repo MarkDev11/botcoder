@@ -12,11 +12,16 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 from ollama import AsyncClient
 
+# Tambahan import untuk dummy web server Render
+from flask import Flask
+import threading
+
 # ==========================================
 # 1. KONFIGURASI & LIMIT SYSTEM
 # ==========================================
-TELEGRAM_TOKEN = "ISI_TOKEN_TELEGRAM_BOT_UJI_COBA_DI_SINI"
-OLLAMA_API_KEY = "ISI_API_KEY_OLLAMA_CLOUD_DI_SINI"
+# Mengambil token secara aman dari Environment Variables
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+OLLAMA_API_KEY = os.environ.get("OLLAMA_API_KEY")
 
 MAX_FILES_PER_PROJECT = 10  # 🛡️ Hard Limit anti RAM jebol / Abuse
 BLUEPRINT_TTL = 3600        # 🗑 Waktu kadaluarsa blueprint (1 Jam)
